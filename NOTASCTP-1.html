@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas CTP SanRa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            width: 80%;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Notas CTP SanRa</h2>
+        <div id="login">
+            <input type="text" id="usuario" placeholder="Ingrese usuario">
+            <input type="password" id="contrasenia" placeholder="Ingrese contraseña">
+            <button onclick="validarUsuario()">Iniciar Sesión</button>
+        </div>
+        <div id="contenido" style="display: none;">
+            <h3>Ingrese Datos del Estudiante</h3>
+            <input type="text" id="nombre" placeholder="Nombre">
+            <input type="text" id="apellido1" placeholder="Primer Apellido">
+            <input type="text" id="apellido2" placeholder="Segundo Apellido">
+            <input type="text" id="seccion" placeholder="Sección">
+            <input type="number" id="puntosTotales" placeholder="Puntos Totales">
+            <input type="number" id="puntosObtenidos" placeholder="Puntos Obtenidos">
+            <input type="number" id="porcentajeExamen" placeholder="Porcentaje del Examen">
+            <button onclick="calcularNota()">Calcular Nota</button>
+            <button onclick="calcularPorcentaje()">Calcular Porcentaje</button>
+            <p id="resultado"></p>
+        </div>
+    </div>
+    <script>
+        function validarUsuario() {
+            const usuario = document.getElementById("usuario").value;
+            const contrasenia = document.getElementById("contrasenia").value;
+            if (usuario === "usuario" && contrasenia === "4545") {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("contenido").style.display = "block";
+            } else {
+                alert("Credenciales incorrectas");
+            }
+        }
+        
+        function calcularNota() {
+            const puntosTotales = parseFloat(document.getElementById("puntosTotales").value);
+            const puntosObtenidos = parseFloat(document.getElementById("puntosObtenidos").value);
+            if (puntosTotales > 0) {
+                const nota = (puntosObtenidos * 100) / puntosTotales;
+                document.getElementById("resultado").innerText = `Nota final: ${nota.toFixed(2)}/100`;
+            } else {
+                alert("Los puntos totales deben ser mayores que 0.");
+            }
+        }
+        
+        function calcularPorcentaje() {
+            const puntosTotales = parseFloat(document.getElementById("puntosTotales").value);
+            const puntosObtenidos = parseFloat(document.getElementById("puntosObtenidos").value);
+            const porcentajeExamen = parseFloat(document.getElementById("porcentajeExamen").value);
+            if (puntosTotales > 0) {
+                const porcentajeObtenido = (puntosObtenidos * porcentajeExamen) / puntosTotales;
+                document.getElementById("resultado").innerText = `Porcentaje obtenido: ${porcentajeObtenido.toFixed(2)}% de ${porcentajeExamen}%`;
+            } else {
+                alert("Los puntos totales deben ser mayores que 0.");
+            }
+        }
+    </script>
+</body>
+</html>
